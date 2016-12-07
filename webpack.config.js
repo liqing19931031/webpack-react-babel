@@ -16,14 +16,22 @@ var base = {
 		// 加载器配置
 		loaders: [
 			{
-				text: /\.js$/, //判断当文件类型为js的时候,进行es6的转义
+				test: /\.js$/, //判断当文件类型为js的时候,进行es6的转义
 				exclude: /node_modules/, //忽视exclude下的文件,不进行转义
 				loader: 'babel'
 			},
 			{
-				text: /\.jsx$/, //判断当文件类型为jsx的时候,进行es6的转义
+				test: /\.jsx$/, //判断当文件类型为jsx的时候,进行es6的转义
 				loader: 'babel'
-			}
+			},
+			{ 	
+				test: /\.css$/,
+				loader: 'style-loader!css-loader'
+			},
+      		{ 	
+      			test: /\.less$/,
+      			loader: 'style-loader!css-loader!less-loader'
+      		}
 		]
 	},
 	watch: true, //实时监听不用手动进行编译
@@ -40,7 +48,7 @@ var base = {
 			path.join(__dirname)
 		],
 		// 这里用来指定模块的后缀,这样你再引入模块的时候就不需要再写后缀名了
-        extensions: ['', '.js', '.json', '.less', '.jsx']
+        extensions: ['', '.js', '.less', '.jsx']
     },
     devServer: {
     	contentBase: './static',
